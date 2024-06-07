@@ -1,4 +1,4 @@
-package com.dvlasenko.app.service.impl.member;
+package com.dvlasenko.app.service.impl.contact;
 
 import com.dvlasenko.app.entity.Contact;
 import com.dvlasenko.app.service.BaseService;

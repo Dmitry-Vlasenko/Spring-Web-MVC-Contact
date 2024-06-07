@@ -1,44 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<body style="background-color: #E9ECEB;">
-		<div th:fragment="book_add" class="container m-2">
+		<div th:fragment="contact_add" class="container m-2">
 			<div class="container-sm" style="background-color: #FCFCFC;">
 				<div class="row">
-					<!-- Add form start -->
 					<div class="col-md-6 offset-md-3">
-						<h4 class="text-center mb-3 mt-3 text-warning">Add Book</h4>
-						<!-- form -->
-						<!-- В атрибутах for, id, name прописуємо так, як прописані змінні в Entity-класі,
-						оскільки Hibernate розуміє саме такий напис -->
-						<form th:action="@{/add-book}" method="post">
+						<h4 class="text-center mb-3 mt-3 text-warning">Add Contact</h4>
+						<form th:action="@{/add-contact}" method="post">
 							<div>
-								<label for="title"><span style="font-size:12px;">Title</span></label>
-								<input type="text" class="form-control fw-light" id="title" name="title"
-									placeholder="Book title...">
+								<label for="firstName"><span style="font-size:12px;">First name</span></label>
+								<input type="text" class="form-control fw-light" id="firstName" name="firstName"
+									placeholder="Contact First name">
 							</div>
 							<div>
-								<label for="author"><span style="font-size:12px;">Author</span></label>
-								<input type="text" class="form-control fw-light" id="author" name="author"
-									placeholder="Book author...">
+								<label for="lastName"><span style="font-size:12px;">Last name</span></label>
+								<input type="text" class="form-control fw-light" id="lastName" name="lastName"
+									placeholder="Contact Last name">
 							</div>
 							<div>
-								<label for="description"><span style="font-size:12px;">Description</span></label>
-								<textarea class="form-control fw-light" name="description" id="description"
-									rows="3" placeholder="Book description..."></textarea>
-							</div>
-							<div>
-								<label for="quota"><span style="font-size:12px;">Quota</span></label>
-								<input type="text" class="form-control fw-light" id="quota" name="quota"
-									placeholder="Quota of books...">
+								<label for="phoneNumber"><span style="font-size:12px;">Phone number</span></label>
+								<textarea class="form-control fw-light" name="phoneNumber" id="phoneNumber"
+									rows="3" placeholder="Contact Phone number"></textarea>
 							</div>
 							<div class="container text-center mb-4"><br>
-								<a th:href="@{/books}" class="btn btn-outline-primary btn-sm">Back</a>
+								<a th:href="@{/contacts}" class="btn btn-outline-primary btn-sm">Back</a>
 								&nbsp;&nbsp;
 								<button type="submit" class="btn btn-primary btn-sm">Add</button>
 							</div>
 						</form>
 					</div>
-					<!-- Add form end -->
 				</div>
 			</div>
 		</div>

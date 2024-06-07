@@ -1,4 +1,4 @@
-package com.dvlasenko.app.repository.impl.member;
+package com.dvlasenko.app.repository.impl.contact;
 
 import com.dvlasenko.app.entity.Contact;
 import com.dvlasenko.app.repository.BaseRepository;

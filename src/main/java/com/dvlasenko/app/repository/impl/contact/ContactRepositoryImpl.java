@@ -1,4 +1,4 @@
-package com.dvlasenko.app.repository.impl.member;
+package com.dvlasenko.app.repository.impl.contact;
 
 import com.dvlasenko.app.entity.Contact;
 import org.hibernate.Session;
@@ -21,7 +21,7 @@ public class ContactRepositoryImpl implements ContactRepository {
     public boolean create(Contact member) {
         Session session = sessionFactory.getCurrentSession();
         String hql = "INSERT INTO Contact (firstName, lastName, phoneNumber) " +
-                "VALUES (:firstName, :lastName, :email)";
+                "VALUES (:firstName, :lastName, :phoneNumber)";
         MutationQuery query = session.createMutationQuery(hql);
         query.setParameter("firstName", member.getFirstName());
         query.setParameter("lastName", member.getLastName());
@@ -33,8 +33,7 @@ public class ContactRepositoryImpl implements ContactRepository {
     public Optional<List<Contact>> fetchAll() {
         try {
             Session session = sessionFactory.getCurrentSession();
-            List<Contact> list = session.createQuery("FROM Contact",
-                    Contact.class).list();
+            List<Contact> list = session.createQuery("FROM Contact", Contact.class).list();
             return Optional.of(list);
         } catch (Exception e) {
             return Optional.empty();

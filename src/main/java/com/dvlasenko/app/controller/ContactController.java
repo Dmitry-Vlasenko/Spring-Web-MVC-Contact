@@ -1,14 +1,13 @@
 package com.dvlasenko.app.controller;
 
+
 import com.dvlasenko.app.entity.Contact;
-import com.dvlasenko.app.service.impl.member.ContactService;
+import com.dvlasenko.app.service.impl.contact.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -23,38 +22,46 @@ public class ContactController {
         List<Contact> list = contactService.fetchAll();
         model.addAttribute("title", "Contacts");
         model.addAttribute("contacts", list);
-        return "contact_list";
+        model.addAttribute("fragmentName", "contact_list");
+        return "layout";
     }
 
-    @GetMapping("/create-contact")
+    @RequestMapping("/create-contact")
     public String createContact(Model model) {
         model.addAttribute("title", "Add Contact");
-        return "contact_add";
+        model.addAttribute("fragmentName", "contact_add");
+        return "layout";
     }
 
-    @PostMapping("/add-contact")
-    public String addContact(@ModelAttribute Contact contact, Model model) {
-        contactService.create(contact);
-        return "redirect:/contacts";
+    @RequestMapping(value = "/add-contact", method = RequestMethod.POST)
+    public RedirectView addContact(@ModelAttribute Contact contact) {
+        RedirectView redirectView = new RedirectView("/contacts");
+        if (contactService.create(contact))
+            return redirectView;
+        else return redirectView;
     }
 
-    @GetMapping("/update-contact/{id}")
+    @RequestMapping("/update-contact/{id}")
     public String updateContact(@PathVariable("id") Long id, Model model) {
         model.addAttribute("title", "Update Contact");
         Contact contact = contactService.fetchById(id);
         model.addAttribute("contact", contact);
-        return "contact_update";
+        model.addAttribute("fragmentName", "contact_update");
+        return "layout";
     }
 
-    @PostMapping("/change-contact")
-    public String changeContact(@ModelAttribute Contact contact, Model model) {
-        contactService.update(contact.getId(), contact);
-        return "redirect:/contacts";
+    @RequestMapping(value = "/change-contact", method = RequestMethod.POST)
+    public RedirectView changeContact(@ModelAttribute Contact contact) {
+        RedirectView redirectView = new RedirectView("/contacts");
+        if (contactService.update(contact.getId(), contact))
+            return redirectView;
+        else return redirectView;
     }
 
-    @GetMapping("/delete-contact/{id}")
-    public String deleteContact(@PathVariable("id") Long id, Model model) {
-        contactService.delete(id);
-        return "redirect:/contacts";
+    @RequestMapping("/delete-contact/{id}")
+    public RedirectView deleteContact(@PathVariable("id") Long id) {
+        RedirectView redirectView = new RedirectView("/contacts");
+        if (contactService.delete(id)) return redirectView;
+        else return redirectView;
     }
 }

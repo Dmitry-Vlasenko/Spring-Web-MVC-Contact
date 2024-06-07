@@ -1,7 +1,7 @@
-package com.dvlasenko.app.service.impl.member;
+package com.dvlasenko.app.service.impl.contact;
 
 import com.dvlasenko.app.entity.Contact;
-import com.dvlasenko.app.repository.impl.member.ContactRepository;
+import com.dvlasenko.app.repository.impl.contact.ContactRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
